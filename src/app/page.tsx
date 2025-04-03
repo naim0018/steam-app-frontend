@@ -26,7 +26,7 @@ export default function Home() {
     page: currentPage,
     limit: itemsPerPage,
   });
-  console.log(games)
+  
   // Update page when URL changes
   useEffect(() => {
     const page = parseInt(searchParams.get('page') || '1', 10);
@@ -44,7 +44,20 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-gray-900 text-white">
       <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-8">Steam Games Explorer</h1>
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-bold">Steam Games Explorer</h1>
+          
+          {/* Top pagination */}
+          {!isLoading && !error && totalPages > 1 && (
+            <div className="hidden md:block">
+              <Pagination 
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+              />
+            </div>
+          )}
+        </div>
         
         {error ? (
           <ErrorDisplay 
@@ -82,12 +95,15 @@ export default function Home() {
                   ))}
                 </div>
                 
+                {/* Bottom pagination */}
                 {totalPages > 1 && (
-                  <Pagination 
-                    currentPage={currentPage}
-                    totalPages={totalPages}
-                    onPageChange={handlePageChange}
-                  />
+                  <div className="mt-8">
+                    <Pagination 
+                      currentPage={currentPage}
+                      totalPages={totalPages}
+                      onPageChange={handlePageChange}
+                    />
+                  </div>
                 )}
               </>
             )}

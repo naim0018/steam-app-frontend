@@ -1,13 +1,12 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import { Providers } from "./providers";
+import React from 'react';
 
-const inter = Inter({ subsets: ["latin"] });
+import Navbar from '@/components/ui/Navbar';
+import '../app/globals.css';
+import { Providers } from './providers';
 
-export const metadata: Metadata = {
-  title: "Steam Games Explorer",
-  description: "Explore Steam games and their details",
+export const metadata = {
+  title: 'Steam Games Explorer',
+  description: 'Browse and search Steam games',
 };
 
 export default function RootLayout({
@@ -17,8 +16,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Providers>{children}</Providers>
+      <body className="bg-gray-900">
+        <Providers>
+          <Navbar />
+          {children}
+        </Providers>
       </body>
     </html>
   );

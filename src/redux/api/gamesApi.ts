@@ -40,10 +40,16 @@ export const gamesApi = createApi({
     getGamesDetailsById: builder.query<{ data: GameDetails }, number>({
       query: (appId) => `/steam/${appId}`,
     }),
+    searchGames: builder.query<{ data: any[], meta: { total: number } }, string>({
+      query: (searchTerm) => ({
+        url: '/steam/search',
+        params: { term: searchTerm }
+      }),
+    }),
   }),
 });
 
-export const { useGetAllGamesQuery, useGetGamesDetailsByIdQuery } = gamesApi;
+export const { useGetAllGamesQuery, useGetGamesDetailsByIdQuery, useSearchGamesQuery } = gamesApi;
 
 // // Helper functions for image URLs
 // export const getGameHeaderImage = (appId: number, imgLogoUrl: string): string => {

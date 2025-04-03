@@ -87,6 +87,11 @@ const SearchBar: React.FC<SearchBarProps> = ({
       updateQueryParam(query);
       saveToHistory(query);
       setShowSuggestions(false);
+      
+      // Redirect to search page if not already there
+      if (!window.location.pathname.includes('/search')) {
+        router.push(`/search?q=${encodeURIComponent(query)}`);
+      }
     }
   };
 
